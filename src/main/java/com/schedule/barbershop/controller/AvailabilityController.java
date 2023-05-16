@@ -32,7 +32,7 @@ public class AvailabilityController {
     @PutMapping("/{id}")
     public ResponseEntity<Availability> updateAvailability(@PathVariable Long id, @RequestBody Availability availability) {
         Availability existingAvailability = availabilityService.findById(id);
-        existingAvailability.setProfessional(availability.getProfessional());
+        existingAvailability.setEmployee(availability.getEmployee());
         existingAvailability.setStartDate(availability.getStartDate());
         existingAvailability.setEndDate(availability.getEndDate());
         existingAvailability.setStartTime(availability.getStartTime());

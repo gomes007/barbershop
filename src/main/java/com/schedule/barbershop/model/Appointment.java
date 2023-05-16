@@ -15,7 +15,7 @@ public class Appointment {
     private Client client;
 
     @ManyToOne
-    private Professional professional;
+    private Employee employee;
 
     private LocalDateTime dateTime;
 

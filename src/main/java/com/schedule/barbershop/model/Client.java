@@ -18,7 +18,4 @@ public class Client {
     @Column(name = "phone")
     private String phoneNumber;
 
-
-
-
 }

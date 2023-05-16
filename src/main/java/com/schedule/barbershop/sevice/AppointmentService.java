@@ -22,6 +22,6 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAvailableTimeSlots(Long professionalId, LocalDateTime start, LocalDateTime end) {
-        return appointmentRepository.findAllByProfessionalIdAndDateTimeBetween(professionalId, start, end);
+        return appointmentRepository.findAllByEmployeeIdAndDateTimeBetween(professionalId, start, end);
     }
 }

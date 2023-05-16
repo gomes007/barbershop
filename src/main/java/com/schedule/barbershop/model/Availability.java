@@ -1,6 +1,7 @@
 package com.schedule.barbershop.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class Availability {
     private Long id;
 
     @ManyToOne
-    private Professional professional;
+    @JsonBackReference
+    private Employee employee;
 
     private LocalDate startDate;
     private LocalDate endDate;
