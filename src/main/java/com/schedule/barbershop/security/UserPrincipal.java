@@ -16,7 +16,17 @@ public class UserPrincipal implements UserDetails {
 
     public UserPrincipal(User user){
         this.user = user;
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Permission permission : user.getRole().getPermissions()) {
+            GrantedAuthority authority = new SimpleGrantedAuthority(permission.getName());
+            authorities.add(authority);
+        }
+        this.authorities = authorities;
     }
+
 
     private Long id;
     private String email;
@@ -82,12 +92,15 @@ public class UserPrincipal implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for(Permission permission : user.getRole().getPermissions()) {
-            GrantedAuthority authority = new SimpleGrantedAuthority(permission.getName());
-            authorities.add(authority);
+        if (user != null && user.getRole() != null && user.getRole().getPermissions() != null) {
+            for (Permission permission : user.getRole().getPermissions()) {
+                GrantedAuthority authority = new SimpleGrantedAuthority(permission.getName());
+                authorities.add(authority);
+            }
         }
         return authorities;
     }
+
 
 
 }

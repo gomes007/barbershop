@@ -16,25 +16,24 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException("User not found with username : " + username);
         }
         return UserPrincipal.create(user);
     }
 
     // This method is added so that we can retrieve the user in the filter
     public UserDetails loadUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new UsernameNotFoundException("User not found with id : " + id)
-        );
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with id : " + id);
+        }
 
         return UserPrincipal.create(user);
     }
-
-
 }
+
 

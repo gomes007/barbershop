@@ -1,6 +1,6 @@
 package com.schedule.barbershop.controller;
 
-import com.schedule.barbershop.model.Client;
+import com.schedule.barbershop.model.Customer;
 import com.schedule.barbershop.sevice.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,14 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<List<Client>> getAllClients() {
+    public ResponseEntity<List<Customer>> getAllClients() {
         return ResponseEntity.ok(clientService.findAll());
     }
 
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody Client client) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
+    public ResponseEntity<Customer> createClient(@RequestBody Customer customer) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(customer));
     }
 
 
